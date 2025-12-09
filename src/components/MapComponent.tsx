@@ -1,19 +1,13 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import type { Flight } from "../types";
-import L from "leaflet";
+import FlightMarker from "./FlightMarker";
 
 interface MapComponentProps {
   flights: Flight[];
+  selectedFlightIcao?: string | null;
 }
 
-const planeIcon = L.icon({
-  iconUrl: 'https://www.shutterstock.com/shutterstock/photos/1974284840/display_1500/stock-vector-transparent-plane-icon-png-vector-illustration-of-an-plane-icon-in-dark-color-and-transparent-1974284840.jpg',
-  iconSize: [25, 25],
-  iconAnchor: [12, 12],
-  popupAnchor: [0, -10],
-})
-
-function MapComponent({ flights }: MapComponentProps) {
+function MapComponent({ flights, selectedFlightIcao }: MapComponentProps) {
   const initialPosition: [number, number] = [42.36, -71.06]; // 
   const initialZoom: number = 9;
 
@@ -31,10 +25,10 @@ function MapComponent({ flights }: MapComponentProps) {
         />
 
         {flights.map((flight) => (
-          <Marker 
+          <FlightMarker 
             key={flight.icao24}
-            position={[flight.latitude, flight.longitude]}
-            icon={planeIcon}
+            flight={flight}
+            isSelected={flight.icao24 === selectedFlightIcao}
             >
               <Popup>
                 **Callsign:** {flight.callsign}
@@ -43,7 +37,7 @@ function MapComponent({ flights }: MapComponentProps) {
                 <br />
                 **Speed:** {Math.round(flight.velocity * 1.94384)} knots                
               </Popup>
-            </Marker>
+            </FlightMarker>
         ))}
       </MapContainer>
     </div>

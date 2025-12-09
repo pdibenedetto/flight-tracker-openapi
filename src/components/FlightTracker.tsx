@@ -25,6 +25,7 @@ const MOCK_FLIGHTS: Flight[] = [
 
 function FlightTracker() {
   const [flights, setFlights] = useState<Flight[]>(MOCK_FLIGHTS);
+  const [selectedFlightIcao, setSelectedFlightIcao] = useState<string | null>(null);
 
   const BBOX_URL_PRAMS = "lamin=40.86&lomin=-73.56&lamax=43.86&lomax=-68.56";
   const API_URL = `https://opensky-network.org/api/states/all?${BBOX_URL_PRAMS}`;
@@ -50,20 +51,31 @@ function FlightTracker() {
   // API -> useEffect -> state -> props -> {MapComponent, FLightList>}
 
   useEffect(() => {
-    // fetchFlightData();
+    fetchFlightData();
 
-    // const intervalId = setInterval(fetchFlightData, 30000);
+    const intervalId = setInterval(fetchFlightData, 30000);
 
     return () => {
       console.log("Clearing interval...");
-      // clearInterval(intervalId);
+      clearInterval(intervalId);
     };
   }, []);
 
+  function handleFlightSelect(icao24: string): void {
+    setSelectedFlightIcao(icao24);
+  }
+
   return (
     <main className="tracker-layout">      
-      <MapComponent flights={flights} />
-      <FlightList flights={flights} />
+      <MapComponent 
+        flights={flights} 
+        selectedFlightIcao={selectedFlightIcao}
+      />
+      <FlightList 
+        flights={flights}
+        selectedFlightIcao={selectedFlightIcao}
+        onFlightSelect={handleFlightSelect}
+      />
     </main>
   );
 }
