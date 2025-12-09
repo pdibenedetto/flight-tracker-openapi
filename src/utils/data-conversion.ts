@@ -1,5 +1,7 @@
 import type { Flight } from "../types";
 
+const TRUE_TRACK_INDEX = 10;
+
 export function convertOpenSkyData(data: any): Flight[] {
 
     // [0] = icao24
@@ -33,6 +35,7 @@ export function convertOpenSkyData(data: any): Flight[] {
                     longitude: stateVector[LONGITUDE_INDEX],
                     altitude: stateVector[ALTITUDE_INDEX] || 0,
                     velocity: stateVector[VELOCITY_INDEX] || 0,
+                    heading: stateVector[TRUE_TRACK_INDEX] || 0,
                 };
             })
             .filter((flight): flight is Flight => flight !== null);      

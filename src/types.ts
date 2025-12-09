@@ -6,8 +6,11 @@ export interface Flight {
   longitude: number;
   altitude: number;         // in meters
   velocity: number;         // in m/s
+  heading: number;
 }
 
 export interface FlightListProps {
     flights: Flight[];
+    onFlightSelect: (icao24: string) => void;
+    selectedFlightIcao?: string | null;
 }

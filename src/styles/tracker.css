@@ -1,4 +1,4 @@
-.tracker-layout {
+/* .tracker-layout {
     display: flex;
     flex-direction: row;
     height: 100vh;
@@ -35,4 +35,82 @@
 .flight-sidebar li:hover {
     background-color: #e9e9e9;
 }
+ */
+/* src/styles/Tracker.css (Replace ALL content) */
 
+:root {
+    --dark-bg: #1e1e2f;       /* Deep blue/grey for command center feel */
+    --light-bg: #27293d;      /* Slightly lighter for containers/sidebar */
+    --text-color: #e9ecef;    /* Off-white text */
+    --accent-color: #00bcd4;  /* Bright cyan for highlights (tech look) */
+    --sidebar-width: 300px;
+}
+
+/* Global Styles */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-color); /* Default text color is light */
+}
+
+/* Layout Container: Retains Flexbox structure */
+.tracker-layout {
+    display: flex;
+    flex-direction: row; 
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Map (Main View) */
+.leaflet-container { 
+    width: calc(100% - var(--sidebar-width)); 
+    height: 100%; 
+}
+
+/* Sidebar (FlightList) Styling */
+.flight-sidebar {
+    width: var(--sidebar-width);
+    padding: 15px;
+    background-color: var(--light-bg);
+    overflow-y: auto; 
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4); /* Subtle shadow for depth */
+    min-width: 250px;
+}
+
+/* Sidebar Headers and Text */
+.flight-sidebar h3 {
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 5px;
+    margin-top: 0;
+}
+
+.flight-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+/* Base List Item */
+.flight-sidebar li {
+    padding: 8px;
+    margin-bottom: 3px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid var(--light-bg);
+    transition: background-color 0.15s, border-color 0.15s;
+    font-size: 0.9em;
+}
+
+.flight-sidebar li:hover {
+    background-color: rgba(0, 188, 212, 0.1); /* Light accent hover */
+}
+
+/* Highlight for Selected Flight (Targets the inline style from previous step) */
+.flight-sidebar li[style*="#e6f7ff"] { 
+    background-color: var(--accent-color) !important; /* Override the color */
+    color: var(--dark-bg) !important; /* Dark text on bright background */
+    font-weight: bold;
+    border-color: var(--accent-color);
+}
