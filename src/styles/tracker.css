@@ -1,0 +1,38 @@
+.tracker-layout {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.flight-sidebar {
+    width: 30%;
+    padding: 15px;
+    background-color: #f7f7f7;
+    overflow: auto;
+    box-shadow: -2px 0 5px rga(0, 0, 0, 0.1);
+    min-width: 250px;
+}
+
+.leaflet-container {
+    width: 70%;
+    height: 100%;
+}
+
+.flight-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.flight-sidebar li {
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.flight-sidebar li:hover {
+    background-color: #e9e9e9;
+}
+
