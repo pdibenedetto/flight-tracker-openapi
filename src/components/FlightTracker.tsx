@@ -12,6 +12,7 @@ const MOCK_FLIGHTS: Flight[] = [
     longitude: -74.0,
     altitude: 10000,
     velocity: 250,
+    heading: 90,
   },
   {
     icao24: "d4e5f6",
@@ -20,6 +21,7 @@ const MOCK_FLIGHTS: Flight[] = [
     longitude: -118.2,
     altitude: 8500,
     velocity: 200,
+    heading: 45,
   },
 ];
 
@@ -59,7 +61,7 @@ function FlightTracker() {
       console.log("Clearing interval...");
       clearInterval(intervalId);
     };
-  }, []);
+  });
 
   function handleFlightSelect(icao24: string): void {
     setSelectedFlightIcao(icao24);

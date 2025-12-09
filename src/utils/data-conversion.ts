@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Flight } from "../types";
 
 const TRUE_TRACK_INDEX = 10;
@@ -38,5 +39,5 @@ export function convertOpenSkyData(data: any): Flight[] {
                     heading: stateVector[TRUE_TRACK_INDEX] || 0,
                 };
             })
-            .filter((flight): flight is Flight => flight !== null);      
+            .filter((flight: Flight | null): flight is Flight => flight !== null);      
 };

@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer } from "react-leaflet";
 import type { Flight } from "../types";
 import FlightMarker from "./FlightMarker";
 
@@ -29,15 +29,7 @@ function MapComponent({ flights, selectedFlightIcao }: MapComponentProps) {
             key={flight.icao24}
             flight={flight}
             isSelected={flight.icao24 === selectedFlightIcao}
-            >
-              <Popup>
-                **Callsign:** {flight.callsign}
-                <br />
-                **Altitude:** {Math.round(flight.altitude * 328084)} ft
-                <br />
-                **Speed:** {Math.round(flight.velocity * 1.94384)} knots                
-              </Popup>
-            </FlightMarker>
+          />
         ))}
       </MapContainer>
     </div>
